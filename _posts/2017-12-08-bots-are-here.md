@@ -2,6 +2,8 @@
 layout: post
 title: Bots are here
 tags: [Continuous Delivery, ChatOps]
+gh-repo: ivans-innovation-lab/my-company-automations
+gh-badge: [star, fork, follow]
 ---
 
 

@@ -2,6 +2,8 @@
 layout: post
 title: Continuous delivery in the cloud
 tags: [Architecture, Continuous Delivery, DevOps]
+gh-repo: ivans-innovation-lab/my-company-monolith
+gh-badge: [star, fork, follow]
 ---
 
 The idea of automated deployment is important. Indeed, if you take automating the deployment process to its logical conclusion, you could push every build that passes the necessary automated tests into production. The practice of automatically deploying every successful build directly into production is generally known as Continuous Deployment.
