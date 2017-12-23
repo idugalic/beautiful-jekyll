@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Accelerating the digitization
-image: /img/successtriangle.png
 tags: [Architecture, Continuous Delivery, DevOps]
 ---
 
