@@ -21,7 +21,7 @@ New challenges are rising:
 
 Those challenges highlight the need for greater collaboration between, and within, teams and this is a challenge that Atomist is addressing.
 
-In one of my previous [posts](http://idugalic.pro/Accelerating-the-digitization/) I wrote that there is important relation between architecture, process (continuous delivery) and the culture (devops, chatops). 
+In one of my previous [posts](http://idugalic.pro/accelerating-the-digitization/) I wrote that there is important relation between architecture, process (continuous delivery) and the culture (devops, chatops). 
 For the purposes of this post we will use an [open source lab](http://lab.idugalic.pro) that I regularly maintain, and focus on [monolithic](https://docs.lab.idugalic.pro/chapter1/monolithic/overview.html) (modular) architectural pattern. You will see how Atomist is helping me steering the process.
 
 ![](https://github.com/idugalic/idugalic.github.io/raw/master/img/atomist_1.png)
