@@ -23,6 +23,7 @@ Example of reactive web application. Java. Spring (spring 5, spring boot, spring
 This project is intended to demonstrate best practices for building a reactive web application. Focus is on the reactive programming.
 
 ## [micro-company](http://idugalic.github.io/micro-company/)
+[![Build Status](https://travis-ci.org/idugalic/micro-company.svg?branch=master)](https://travis-ci.org/idugalic/micro-company)
 Example of rest-full, hipermedia-based, distributed application. Java. Spring (spring boot, spring data, spring cloud). CQRS. Eventsourcing. Axonframework. Event-driven Microservices. Docker.
 
 This project is intended to demonstrate end-to-end best practices for building a cloud native, event driven microservice architecture.
