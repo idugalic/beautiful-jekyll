@@ -273,17 +273,17 @@ workflows:
               only: master
 ```
 
-The following example shows a [pipeline](https://circleci.com/gh/ivans-innovation-lab/workflows/my-company-monolith) with seven sequential jobs. The jobs run according to configured requirements, each job waiting to start until the required job finishes successfully. This pipeline is configured to wait for manual approval of a job 'approve-production' before continuing by using the `type: approval` key. The `type: approval` key is a special job that is only added under your `workflow` key
+The following example shows a [pipeline](https://circleci.com/gh/ivans-innovation-lab/workflows/my-company-monolith) with seven jobs (steps). The jobs run according to configured requirements, each job waiting to start until the required job finishes successfully. This pipeline is configured to wait for manual approval of a job 'approve-production' before continuing by using the `type: approval` key. The `type: approval` key is a special job that is only added under your `workflow` key
 
 ![](https://github.com/idugalic/idugalic.github.io/raw/master/img/Screen%20Shot%202017-09-09%20at%201.13.34%20PM.png)
 
 ### Staging
 
-Every push to **master** branch \(every time you merge a feature branch\) will trigger the pipeline and the application will be deployed to PWS on '**Stage**' space:![](https://docs.lab.idugalic.pro/assets/Screen%20Shot%202017-06-21%20at%201.28.42%20PM.png)Additionally, a current production artifact will be deployed on Stage by 'staging-prod' job for DB schema backward compatibility testing \(we will test old application against new DB schema\). This will enable Blue-Green deployment with roll-back option, as shown below under Blue-Green Deployment section.
+Every push to **master** branch \(every time you merge a feature branch\) will trigger the pipeline and the application will be deployed to PWS on '**Stage**' space:![](https://docs.lab.idugalic.pro/assets/Screen%20Shot%202017-06-21%20at%201.28.42%20PM.png) Additionally, a current production artifact will be deployed on Stage by 'staging-prod' job for DB schema backward compatibility testing \(we will test old application against new DB schema\). This will enable Blue-Green deployment with roll-back option, as shown below under [Blue-Green Deployment section](#blue-green-deployment).
 
 ### Production
 
-Once you are ready to deploy to **production** you should manually approve deployment to production in you CircleCI workflow/pipeline. This will trigger next job \(production\) and the application will be deployed (with zero-downtime) to PWS on '**Prod**' space:![](https://docs.lab.idugalic.pro/assets/Screen%20Shot%202017-06-21%20at%201.28.58%20PM.png)You can consider removing manual step (approve) and practice Continuous Deployment instead of Continuous Delivery ;)
+Once you are ready to deploy to **production** you should manually approve deployment to production in you CircleCI workflow/pipeline. This will trigger next job \(production\) and the application will be deployed (with zero-downtime) to PWS on '**Prod**' space:![](https://docs.lab.idugalic.pro/assets/Screen%20Shot%202017-06-21%20at%201.28.58%20PM.png) You can consider removing manual step ('approve') and practice Continuous Deployment instead of Continuous Delivery ;)
 
 ### Requirements
 
@@ -355,7 +355,7 @@ This technique can eliminate downtime due to application deployment. In addition
 
 Blue-green deployment is implemented by 'production' job in the [workflow](https://github.com/ivans-innovation-lab/my-company-monolith/blob/master/.circleci/config.yml).
 
-Doing Blue-green deployment with database schema changing is not easy. We have to [change the schema](https://martinfowler.com/books/refactoringDatabases.html) in such a way that Blue-green deployment and roll-back to the previous version are possible, usually by making DB changes backward compatible (this makes DB schema backward compatibility testing an important step). For this we need schema versioning first \([Flyway](http://flywaydb.org/)\). I was inspired with this [blog post](https://spring.io/blog/2016/05/31/zero-downtime-deployment-with-a-database). There you can find more details.
+Doing Blue-green deployment with database schema changing is hard. We have to [change the schema](https://martinfowler.com/books/refactoringDatabases.html) in such a way that Blue-green deployment and roll-back to the previous version are possible, usually by making DB changes backward compatible (this makes DB schema backward compatibility testing an important step). For this we need schema versioning first \([Flyway](http://flywaydb.org/)\). I was inspired with this [blog post](https://spring.io/blog/2016/05/31/zero-downtime-deployment-with-a-database).
 
 You can design your database in the 6th normal form an make you scheme more adaptable and your process more agile. I was inspired with this [blog post](https://blog.codecentric.de/en/2017/07/agile-database-design-using-anchor-modeling/ ).
 
