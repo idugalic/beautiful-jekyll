@@ -288,7 +288,7 @@ Once you are ready to deploy to production you should **manually approve deploym
 
  - removing manual step ('approve') and practice Continuous Deployment instead of Continuous Delivery.
  - introduce new branch 'production', and filter 'production' job based on it. This way you can deploy to production by merging 'master' to 'production'.
- - filter 'production' job by git tags. This way you can deploy to production by creating a new tag (and release) on your git repository. 
+ - [filter 'production' job by git tags](https://circleci.com/docs/2.0/workflows/#git-tag-job-execution). This way you can deploy to production by creating a new tag (and release) on your git repository. CircleCI treats tag and branch filters differently when deciding whether a job should run: for a branch push unaffected by any filters - CircleCI runs the job, for a tag push unaffected by any filters - CircleCI skips the job.
 
 ### Requirements
 
