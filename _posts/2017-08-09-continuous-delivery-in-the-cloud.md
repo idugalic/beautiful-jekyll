@@ -272,9 +272,11 @@ The following example shows a [pipeline](https://circleci.com/gh/ivans-innovatio
 
 ![](https://github.com/idugalic/idugalic.github.io/raw/master/img/Screen%20Shot%202018-02-25%20at%205.41.17%20PM.png)
 
+![](https://github.com/idugalic/idugalic.github.io/raw/master/img/CIrcleCI-Monolith.png)
+
 ### Build 
 
-Application is build on every push to git repository. Build will be triggered from any branch or pull request. 'Build' job is using maven to build and test the application. Successful build will create an artifact that is shared for all the jobs in the pipeline.
+Application is build on every push to git repository. Build can be triggered from any branch or pull request. 'Build' job is using maven to build and test the application. Successful build will create an artifact (jar file) that is shared with all the jobs in the pipeline.
 
 ### Staging
 
