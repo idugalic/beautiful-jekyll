@@ -34,7 +34,7 @@ defaults: &defaults
   working_directory: /home/circleci/my-company-monolith
   docker:
     - image: circleci/openjdk:8-jdk-browsers
-
+    
 version: 2
 jobs:
   # Build and test with maven
@@ -47,54 +47,47 @@ jobs:
       # Downloading from a Remote Repository in Maven is triggered by a project declaring a dependency that is not present in the local repository (or for a SNAPSHOT, when the remote repository contains one that is newer).
       # Do not overwrite your release (not snapshots) artifacts (my-company-blog-domain, my-company-blog-materialized-view, my-company-project-domain, my-company-project-materialized-view) on remote maven repository, othervise the cache will become stale.
       - restore_cache:
-          key: my-company-monolith1-{{ checksum "pom.xml" }}
+          key: my-company-monolith0003-{{ checksum "pom.xml" }}
 
       - run: 
-          name: Install maven artifact
-          command: |
-            if [ "${CIRCLE_BRANCH}" != "master" ]; then
-              mvn -s .circleci/maven.settings.xml install -P idugalic-cloud
-            fi
-
-      - deploy:
-          name: Deploy maven artifact
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              mvn -s .circleci/maven.settings.xml deploy -P idugalic-cloud
-            fi
+          name: Build and Install maven artifact
+          command:  mvn -s .circleci/maven.settings.xml install -P idugalic-cloud
 
       - save_cache:
           paths:
             - ~/.m2
-          key: my-company-monolith1-{{ checksum "pom.xml" }}
-
+          key: my-company-monolith0003-{{ checksum "pom.xml" }}
+      
       - run:
           name: Collecting test results
           command: |
             mkdir -p junit/
             find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} junit/ \;
           when: always
-
+          
       - store_test_results:
           path: junit/
-
+          
       - store_artifacts:
           path: junit/
-
+          
       - run:
           name: Collecting artifacts
           command: |
             mkdir -p artifacts/
+            cp pom.xml artifacts/
+            cp .circleci/maven.settings.xml artifacts/
             find . -type f -regex ".*/target/.*jar" -exec cp {} artifacts/ \;
-
+     
       - store_artifacts:
           path: artifacts/
-
+          
       - persist_to_workspace:
           root: artifacts/
           paths:
             - .
-  # Deploying build artifact on staging environment for testing.
+   
+  # Deploying build artifact on PWS staging environment for testing.
   staging:
     <<: *defaults
     steps:
@@ -115,29 +108,29 @@ jobs:
             cf push stage-my-company-monolith -p workspace/*.jar --no-start
             cf bind-service stage-my-company-monolith mysql
             cf restart stage-my-company-monolith
-
-  # Deploying current production on staging environemnt for DB schema backward compatibility testing.
-  staging-prod:
+  
+  # Deploying current/old production on PWS staging environemnt for DB schema backward compatibility testing.
+  production-on-staging:
     <<: *defaults
     steps:
       - attach_workspace:
           at: workspace/
-
+          
       - run:
           name: Install CloudFoundry CLI
           command: |
             curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
             sudo dpkg -i cf-cli_amd64.deb
             cf -v
-
+      
       - run: 
           name: Install AWS CLI
           command: sudo apt-get update && sudo apt-get install -y awscli
 
       - run:
           name: Download latest production artifact from AWS S3 (AWS Permissions on CircleCI required)
-          command: aws s3 sync s3://my-company-production . --delete --region eu-central-1
-
+          command: aws s3 sync s3://my-company-production . --region eu-central-1
+          
       - deploy:
           name: Deploy latest production application to Staging - PWS CLoudFoundry (CF_PASSWORD variable required)
           command: |
@@ -145,7 +138,7 @@ jobs:
               cf api https://api.run.pivotal.io
               cf auth idugalic@gmail.com $CF_PASSWORD
               cf target -o idugalic -s Stage
-              cf push stage-my-company-monolith-prod -p ./*.jar --no-start
+              cf push stage-my-company-monolith-prod -p workspace/*.jar --no-start
               cf bind-service stage-my-company-monolith-prod mysql
               cf restart stage-my-company-monolith-prod 
             else 
@@ -158,8 +151,8 @@ jobs:
               cf restart stage-my-company-monolith-prod
             fi 
 
-
-  # A very simple e2e test on staging environemnt
+  
+  # A very simple e2e test on PWS staging environemnt
   staging-e2e:
     <<: *defaults
     steps:
@@ -169,10 +162,9 @@ jobs:
             curl -I "https://stage-my-company-monolith.cfapps.io/health"
             curl -I "https://stage-my-company-monolith.cfapps.io/api/blogposts"
             curl -I "https://stage-my-company-monolith.cfapps.io/api/projects"
-
-  # A very simple e2e test of the currnet production application on staging environment.
-  # DB schema backward compatibility testing. Testing if the latest DB schema is compatible with latest production application.
-  staging-prod-e2e:
+      
+  # Testing if the latest DB schema is compatible with latest production application (DB schema backward compatibility testing).
+  production-on-staging-e2e:
     <<: *defaults
     steps: 
       - run: 
@@ -181,33 +173,33 @@ jobs:
             curl -I "https://stage-my-company-monolith-prod.cfapps.io/health"
             curl -I "https://stage-my-company-monolith-prod.cfapps.io/api/blogposts"
             curl -I "https://stage-my-company-monolith-prod.cfapps.io/api/projects"
-
-  # Deploying build artifact on production environment with Blue-Green deployment strategy and the rollback posibility.
-  # Artifact is uploaded to AWS s3 as the latest production artifact as well. It is used within 'staging-prod' and 'staging-prod-e2e' jobs to test DB schema backward compatibility
+              
+  # Deploying build artifact on PWS production environment with Blue-Green deployment strategy and the rollback option.
+  # Build artifact is uploaded to AWS s3 as the latest production artifact in this stage. It is used within 'production-on-staging' and 'production-on-staging-e2e' jobs to test DB schema backward compatibility
   production:
     <<: *defaults
     steps:
       - attach_workspace:
           at: workspace/
-
+          
       - run:
           name: Install CloudFoundry CLI
           command: |
             curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
             sudo dpkg -i cf-cli_amd64.deb
             cf -v
-
+            
       - run: 
           name: Install AWS CLI
           command: sudo apt-get update && sudo apt-get install -y awscli
-
+          
       - deploy:
           name: Deploy to Production - PWS CLoudFoundry (CF_PASSWORD variable required)
           command: |
             cf api https://api.run.pivotal.io
             cf auth idugalic@gmail.com $CF_PASSWORD
             cf target -o idugalic -s Prod
-
+            
             cf push prod-my-company-monolith-B -p workspace/*.jar --no-start
             cf bind-service prod-my-company-monolith-B mysql
             cf restart prod-my-company-monolith-B
@@ -219,15 +211,19 @@ jobs:
             cf app prod-my-company-monolith && cf unmap-route prod-my-company-monolith cfapps.io -n prod-my-company-monolith
             # Stop and rename current Blue in case you need to roll back your changes (only if Blue exist)
             cf app prod-my-company-monolith && cf stop prod-my-company-monolith
+            cf app prod-my-company-monolith-old && cf delete prod-my-company-monolith-old -f
             cf app prod-my-company-monolith && cf rename prod-my-company-monolith prod-my-company-monolith-old
             # Rename Green to Blue
             cf rename prod-my-company-monolith-B prod-my-company-monolith
-
+                           
       - deploy:
           name: Upload latest production artifact to AWS S3 (AWS Permissions on CircleCI required)
           command: aws s3 sync workspace/ s3://my-company-production --delete --region eu-central-1
-
-
+          
+notify:
+  webhooks:
+    - url: https://webhook.atomist.com/atomist/circle
+  
 workflows:
   version: 2
   my-company-monolith-workflow:
@@ -239,29 +235,28 @@ workflows:
           filters:
             branches:
               only: master
-      - staging-prod:
-          requires:
-            - staging
-          filters:
-            branches:
-              only: master
       - staging-e2e:
           requires:
             - staging
           filters:
             branches:
               only: master
-      - staging-prod-e2e:
+      - production-on-staging:
           requires:
-            - staging-prod
+            - staging-e2e
+          filters:
+            branches:
+              only: master
+      - production-on-staging-e2e:
+          requires:
+            - production-on-staging
           filters:
             branches:
               only: master
       - approve-production:
           type: approval
           requires:
-            - staging-e2e
-            - staging-prod-e2e
+            - production-on-staging-e2e
           filters:
             branches:
               only: master
@@ -275,15 +270,23 @@ workflows:
 
 The following example shows a [pipeline](https://circleci.com/gh/ivans-innovation-lab/workflows/my-company-monolith) with seven jobs (steps). The jobs run according to configured requirements, each job waiting to start until the required job finishes successfully. This pipeline is configured to wait for manual approval of a job 'approve-production' before continuing by using the `type: approval` key. The `type: approval` key is a special job that is only added under your `workflow` key
 
-![](https://github.com/idugalic/idugalic.github.io/raw/master/img/Screen%20Shot%202017-09-09%20at%201.13.34%20PM.png)
+![](https://github.com/idugalic/idugalic.github.io/raw/master/img/Screen%20Shot%202018-02-25%20at%205.41.17%20PM.png)
+
+### Build 
+
+Application is build on every push to git repository. Build will be triggered from any branch or pull request. 'Build' job is using maven to build and test the application. Successful build will create an artifact that is shared for all the jobs in the pipeline.
 
 ### Staging
 
-Every push to **master** branch \(every time you merge a feature branch\) will trigger the pipeline and the application will be deployed to PWS on '**Stage**' space:![](https://docs.lab.idugalic.pro/assets/Screen%20Shot%202017-06-21%20at%201.28.42%20PM.png) Additionally, a current production artifact will be deployed on Stage by 'staging-prod' job for DB schema backward compatibility testing \(we will test old application against new DB schema\). This will enable Blue-Green deployment with roll-back option, as shown below under [Blue-Green Deployment section](#blue-green-deployment).
+Every merge or push to **master** branch will trigger the pipeline and the artifact will be deployed to PWS on '**Stage**' space:![](https://docs.lab.idugalic.pro/assets/Screen%20Shot%202017-06-21%20at%201.28.42%20PM.png) Additionally, a current production artifact will be deployed on Stage by 'production-on-staging' job for DB schema backward compatibility testing \(we will test old application against new DB schema\). This will enable Blue-Green deployment with roll-back option, as shown below under [Blue-Green Deployment section](#blue-green-deployment).
 
 ### Production
 
-Once you are ready to deploy to **production** you should manually approve deployment to production in you CircleCI workflow/pipeline. This will trigger next job \(production\) and the application will be deployed (with zero-downtime) to PWS on '**Prod**' space:![](https://docs.lab.idugalic.pro/assets/Screen%20Shot%202017-06-21%20at%201.28.58%20PM.png) You can consider removing manual step ('approve') and practice Continuous Deployment instead of Continuous Delivery ;)
+Once you are ready to deploy to production you should **manually approve deployment to production** in you CircleCI workflow/pipeline. This will trigger then next job \('production'\), and the application will be deployed (with zero-downtime) to PWS on '**Prod**' space:![](https://docs.lab.idugalic.pro/assets/Screen%20Shot%202017-06-21%20at%201.28.58%20PM.png) You can consider:
+
+ - removing manual step ('approve') and practice Continuous Deployment instead of Continuous Delivery.
+ - introduce new branch 'production', and filter 'production' job based on it. This way you can deploy to production by merging 'master' to 'production'.
+ - filter 'production' job by git tags. This way you can deploy to production by creating a new tag (and release) on your git repository. 
 
 ### Requirements
 
