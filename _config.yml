@@ -24,7 +24,7 @@ description: Software Architect
 # List of links in the navigation bar
 navbar-links:
   Open projects: "projects"
-  Open lab:
+  Open innovation lab:
      - 1. Mono-app: "https://idugalic.github.io/micro-company"
      - 2. Mono-repo: "https://ivans-innovation-lab-monorepos.github.io"
      - 3. Multi-repo: "https://ivans-innovation-lab.github.io"
