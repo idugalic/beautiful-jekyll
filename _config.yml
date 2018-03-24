@@ -25,9 +25,8 @@ description: Software Architect
 navbar-links:
   Open projects: "projects"
   Open innovation lab:
-     - 1. Mono-app: "https://idugalic.github.io/micro-company"
-     - 2. Mono-repo: "https://ivans-innovation-lab-monorepos.github.io"
-     - 3. Multi-repo: "https://ivans-innovation-lab.github.io"
+     - 1. Mono-repo: "https://ivans-innovation-lab-monorepos.github.io"
+     - 2. Multi-repo: "https://ivans-innovation-lab.github.io"
   Author's home: "https://idugalic.github.io/"
 
 # Image to show in the navigation bar - image must be a square (width = height)
