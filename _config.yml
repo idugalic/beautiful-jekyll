@@ -220,29 +220,6 @@ prose:
           element: "checkbox"
           label: "Publish"
           help: "Check to publish post, uncheck to hide."
-          
-prose:
-  rooturl: '_posts'
-  siteurl: 'http://idugalic.pro'
-  media: 'img'
-  metadata:
-    _posts:
-      - name: "layout"
-        field:
-          element: "hidden"
-          value: "post"
-      - name: "category"
-        field:
-          element: "select"
-          label: "Add Categories"
-          placeholder: "Choose Tags"
-          options:
-            - name: "Architecture"
-              value: "Architecture"
-            - name: "Continuous Delivery"
-              value: "Continuous Delivery"
-            - name: "DevOps"
-              value: "DevOps"
 
 
 plugins:
