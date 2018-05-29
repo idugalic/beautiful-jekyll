@@ -12,7 +12,7 @@ The main reasons why I am contributing to open source are to:
  - Find mentors and teach others
  - Build public artifacts that help me grow a reputation (and a career)
 
-## [digital-restaurant](http://idugalic.github.io/digital-restaurant/)
+## [digital-restaurant](http://idugalic.github.io/digital-restaurant/) [![Build Status](https://travis-ci.org/idugalic/digital-restaurant.svg?branch=master)](https://travis-ci.org/idugalic/digital-restaurant)
 
 Example of DDD (Domain Driven Design). Java. Spring (boot). Axonframework. Event sourcing. CQRS.
 
