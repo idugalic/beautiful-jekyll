@@ -12,6 +12,12 @@ The main reasons why I am contributing to open source are to:
  - Find mentors and teach others
  - Build public artifacts that help me grow a reputation (and a career)
 
+## [digital-restaurant](http://idugalic.github.io/digital-restaurant/)
+
+Example of DDD (Domain Driven Design). Java. Spring (boot). Axonframework. Event sourcing. CQRS.
+
+This project is intended to demonstrate Domain Driven Design by applying event sourcing and CQRS patterns.
+
 ## [serverless-company](http://idugalic.github.io/serverless-company/) [![Build Status](https://travis-ci.org/idugalic/serverless-company.svg?branch=master)](https://travis-ci.org/idugalic/serverless-company) [![GitPitch](https://gitpitch.com/assets/badge.svg)](https://gitpitch.com/idugalic/serverless-company/master?grs=github&t=white)
 
 Example of 'serverless' architecture/web application. Java. Java script. Apache OpenWhisk. AWS Lambda. Function as a Service or "FaaS". Docker.
