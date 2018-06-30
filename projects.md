@@ -14,7 +14,7 @@ The main reasons why I am contributing to open source are to:
 
 ## [digital-restaurant-angular](http://idugalic.github.io/digital-restaurant-angular/)
 
-Example of Angular (TypeScript) application. It is a front-end part of a ['Restaurant Food To Go']((http://idugalic.github.io/digital-restaurant/)) solution. It consumes REST API and WebSocket(STOMP) provided by [digital-restaurant](http://idugalic.github.io/digital-restaurant/). It is generated with Angular CLI using [Nrwl Nx](https://nrwl.io/nx).
+Example of Angular (TypeScript) application. It is a front-end part of a ['Restaurant Food To Go'](http://idugalic.github.io/digital-restaurant/) solution. It consumes REST API and WebSocket(STOMP) provided by [digital-restaurant](http://idugalic.github.io/digital-restaurant/). It is generated with Angular CLI using [Nrwl Nx](https://nrwl.io/nx).
 
 This project provides an opinionated approach to modular application project structure and patterns by practicing [Atomic design](http://atomicdesign.bradfrost.com/) methodology.
 
