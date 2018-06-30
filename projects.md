@@ -12,7 +12,7 @@ The main reasons why I am contributing to open source are to:
  - Find mentors and teach others
  - Build public artifacts that help me grow a reputation (and a career)
 
-## [digital-restaurant-angular](https://github.com/idugalic/digital-restaurant-angular)
+## [digital-restaurant-angular](http://idugalic.github.io/digital-restaurant-angular/)
 
 Example of Angular (TypeScript) application. It is a front-end part of a 'Restaurant Food To Go' solution. It consumes REST API provided by [digital-restaurant](http://idugalic.github.io/digital-restaurant/). It is generated with Angular CLI using [Nrwl Nx](https://nrwl.io/nx).
 
