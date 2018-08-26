@@ -38,7 +38,7 @@ This project provides an opinionated approach to modular application project str
 
 It is a front-end part of a ['Restaurant Food To Go'](https://github.com/idugalic/digital-restaurant/tree/master/drestaurant-apps/drestaurant-monolith) solution. It consumes REST API and WebSocket (STOMP) provided by [digital-restaurant](http://idugalic.github.io/digital-restaurant/). It is generated with Angular CLI using [Nrwl Nx](https://nrwl.io/nx).
 
-## [digital-restaurant](http://idugalic.github.io/digital-restaurant/) [![Build Status](https://travis-ci.org/idugalic/digital-restaurant.svg?branch=master)](https://travis-ci.org/idugalic/digital-restaurant)
+## [digital-restaurant](http://idugalic.github.io/digital-restaurant/) [![Build Status](https://travis-ci.org/idugalic/digital-restaurant.svg?branch=master)](https://travis-ci.org/idugalic/digital-restaurant) [![GitPitch](https://gitpitch.com/assets/badge.svg)](https://gitpitch.com/idugalic/digital-restaurant/master?grs=github&t=white)
 
 Example of DDD (Domain Driven Design). #Modular. #Kotlin. #Spring (boot). #Axonframework. #Event sourcing. #CQRS.
 
