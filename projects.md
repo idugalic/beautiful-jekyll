@@ -31,7 +31,7 @@ by applying:
  - Microservices architectural style
 
 
-## [axon-scale-demo](http://idugalic.github.io/axon-scale-demo/)
+## [axon-scale-demo](http://idugalic.github.io/axon-scale-demo/) [![Build Status](https://travis-ci.org/idugalic/axon-scale-demo.svg?branch=master)](https://travis-ci.org/idugalic/axon-scale-demo)
 
 Example of Axon application that can scale. #Java. #Modular. #Spring (boot). #Axonframework. #Event sourcing. #CQRS.
 
