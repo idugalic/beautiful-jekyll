@@ -35,15 +35,7 @@ by applying:
 
 Example of Axon application that can scale. #Java. #Modular. #Spring (boot). #Axonframework. #Event sourcing. #CQRS.
 
-This demo project demonstrates `microservices` deployment strategy to local Kubernetes cluster:
-
- - monolithic (both Spring profiles command(**C**QRS) and query(C**Q**RS) are activated within one application/service, the final result is one application/service running: axon-scale-demo)
- - microservices (only one Spring profile is activated per application/service (command or query), the final result are two applications/services running: axon-scale-demo-command and axon-scale-demo-command)
-
-with two different versions:
-
- - non-cluster version (on local host) and/or
- - cluster version (to local **Kubernetes cluster**)
+This demo project demonstrates `microservices` deployment strategy to local Kubernetes cluster.
  
 ## [digital-restaurant-angular](http://idugalic.github.io/digital-restaurant-angular/)
 
