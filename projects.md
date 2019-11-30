@@ -30,6 +30,11 @@ by applying:
  - Monolithic modular architectural style
  - Microservices architectural style
 
+## [order-demo](http://idugalic.github.io/orderdemo/) 
+
+Example of Axon application. #DDD. #Bounded Contexts. #Consumer Driven Contracts. #Java. #Modular. #Spring (boot). #Axonframework. #Event sourcing. #CQRS.
+
+This demo project demonstrates Consumer Driven Contract testing of Axon multi (bounded) context applications, with Pact framework.
 
 ## [axon-scale-demo](http://idugalic.github.io/axon-scale-demo/) [![Build Status](https://travis-ci.org/idugalic/axon-scale-demo.svg?branch=master)](https://travis-ci.org/idugalic/axon-scale-demo)
 
