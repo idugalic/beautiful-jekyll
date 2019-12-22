@@ -12,30 +12,13 @@ The main reasons why I am contributing to open source are to:
  - Find mentors and teach others
  - Build public artifacts that help me grow a reputation (and a career)
  
-This projects are demonstrating use of:
- - Object Oriented Programming and Design concepts
- - Functional and Reactive Programming and Design concepts
-
-with programming languages:
- - Java
- - Kotlin
- - TypeScript
-
-and frameworks:
- - Spring
- - Axonframework
- - Angular
-
-by applying:
- - Monolithic modular architectural style
- - Microservices architectural style
  
-## Domain Driven Design with AxonFramework
+## Domain Driven Design with Axon Framework
 
 | Name          | Description                                                                                  | Technology |
 | ------------- | -------------------------------------------------------------------------------------------- | ---------- |
 | [order-demo](http://idugalic.github.io/orderdemo/) | Consumer Driven Contract Testing of multi (bounded)context applications, with Pact framework | Java |
-| [axon-scale-demo](http://idugalic.github.io/axon-scale-demo/) | Microservices deployment strategy to local Kubernetes cluster | Java |
+| [axon-scale-demo](http://idugalic.github.io/axon-scale-demo/) | Microservices deployment strategy to local Kubernetes cluster and local Docker daemon | Java |
 | [axon-extension-spring-cloud-stream](http://idugalic.github.io/axon-extension-spring-cloud-stream/) | Axon extension which provides integration with Spring Cloud Stream by handling/forwarding events from/to RabbitMQ, Kafka and other binders supported by Spring Cloud Stream | Java |
 | [digital-restaurant](http://idugalic.github.io/digital-restaurant/) | Multi-module maven project holding domain and application components, demonstrating usage of different infrastructural components (AxonServer, RabbitMQ, Kafka) with Monolithic and/or Microservices architectural styles | Kotlin |
 | [axon-vanilla-java-demo](http://idugalic.github.io/axon-vanilla-java-demo/) | Axon Vanilla Java Configuration API demonstration. No Spring ;) | Java |
