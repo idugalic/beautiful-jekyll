@@ -17,7 +17,7 @@ The main reasons why I am contributing to open source are to:
 
 | Name          | Description                                                                                  | Technology |
 | ------------- | -------------------------------------------------------------------------------------------- | ---------- |
-| [order-demo](http://idugalic.github.io/orderdemo/) | Consumer Driven Contract Testing of multi (bounded)context applications, with Pact framework | Java |
+| [axon-contract-testing-demo](http://idugalic.github.io/axon-contract-testing-demo/) | Consumer Driven Contract Testing of multi (bounded)context applications, with Pact framework | Java |
 | [axon-scale-demo](http://idugalic.github.io/axon-scale-demo/) | Microservices deployment strategy to local Kubernetes cluster and local Docker daemon | Java |
 | [axon-extension-spring-cloud-stream](http://idugalic.github.io/axon-extension-spring-cloud-stream/) | Axon extension which provides integration with Spring Cloud Stream by handling/forwarding events from/to RabbitMQ, Kafka and other binders supported by Spring Cloud Stream | Java |
 | [digital-restaurant](http://idugalic.github.io/digital-restaurant/) | Multi-module maven project holding domain and application components, demonstrating usage of different infrastructural components (AxonServer, RabbitMQ, Kafka) with Monolithic and/or Microservices architectural styles | Kotlin |
