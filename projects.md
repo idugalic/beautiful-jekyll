@@ -17,6 +17,8 @@ The main reasons why I am contributing to open source are to:
 
 | Name          | Description                                                                                  | Technology |
 | ------------- | -------------------------------------------------------------------------------------------- | ---------- |
+| [axon-statemachine-demo](http://idugalic.github.io/axon-statemachine-demo/) | Explicit usage of Finite State Machine cocnept with Axon Framework - DDD concepts and OOP concepts are mixed together | Java |
+| [axon-polymorphism-demo](http://idugalic.github.io/axon-polymorphism-demo/) | Axon Framework and OOP concepts (Inheritance, Polymorphism) | Java |
 | [axon-contract-testing-demo](http://idugalic.github.io/axon-contract-testing-demo/) | Consumer Driven Contract Testing of multi (bounded)context applications, with Pact framework | Java |
 | [axon-scale-demo](http://idugalic.github.io/axon-scale-demo/) | Microservices deployment strategy to local Kubernetes cluster and local Docker daemon | Java |
 | [axon-extension-spring-cloud-stream](http://idugalic.github.io/axon-extension-spring-cloud-stream/) | Axon extension which provides integration with Spring Cloud Stream by handling/forwarding events from/to RabbitMQ, Kafka and other binders supported by Spring Cloud Stream | Java |
